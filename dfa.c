@@ -32,7 +32,10 @@ struct DFA
 
 /**
  * Allocate and return a new DFA containing the given number of states.
- **/
+    I'm not sure if I'm building this constructor correctly.
+ *  I used the typedef above to define the pointer to DFA and then I'm tryna use the function below to create DFAss
+ * 
+**/
 extern struct DFA new_DFA(int nstates)
 {
     DFA this = (DFA)malloc(sizeof(struct DFA));
@@ -47,11 +50,16 @@ extern struct DFA new_DFA(int nstates)
 
     for (int i = 0; i < nstates; i++)
     {
+        // Create transition states and store them in array myState
         this->myStates[i] = new_State(i);
+        // set default acceptingState property of each state to false
         this->myStates[i].acceptingState = false;
+
         for (int j = 0; j < 128; j++)
         {
             // set each transition on each state to be null. nextTransitionStateBasedOnCurrentSymbol to be null 
+            // stateNumber of the state stored in [i][j] should contain the number for the next state
+            // Set initial transitions of all input alphabets to -1
             this-> myStates[i].nextTransitionStateBasedOnCurrentSymbol[j].stateNumber = -1;
         }
     }
