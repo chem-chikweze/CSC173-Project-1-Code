@@ -25,9 +25,8 @@
 typedef struct DFA* DFA;
 struct DFA 
 {
-    int nstates; //default value
-    State myStates;
-    // int transitionTable[][];
+    int nstates;                        //default value
+    State* arrayOfStatesInTheDFA;       //array of states in the DFA
 };
 
 /**
@@ -36,32 +35,18 @@ struct DFA
  *  I used the typedef above to define the pointer to DFA and then I'm tryna use the function below to create DFAss
  * 
 **/
-extern struct DFA new_DFA(int nstates)
+extern DFA new_DFA(int nstates)
 {
-    DFA this = (DFA)malloc(sizeof(struct DFA));
+    DFA* this = (DFA*)malloc(sizeof(struct DFA));
     if (this == NULL) {
-        return NULL; // Out of memory...
+        return NULL;                      // Out of memory...
     }
-    this->nstates = nstates; // number of states
-    // create an array of states of length nstates
 
-    this->myStates = (State*) calloc(nstates , sizeof(struct State));
-    // for each state, set acceptingState state to be false
-
+    this-> nstates = nstates;             // number of states
+    this-> arrayOfStatesInTheDFA = (State) calloc(nstates , sizeof(struct State));
     for (int i = 0; i < nstates; i++)
     {
-        // Create transition states and store them in array myState
-        this->myStates[i] = new_State(i);
-        // set default acceptingState property of each state to false
-        this->myStates[i].acceptingState = false;
-
-        for (int j = 0; j < 128; j++)
-        {
-            // set each transition on each state to be null. nextTransitionStateBasedOnCurrentSymbol to be null 
-            // stateNumber of the state stored in [i][j] should contain the number for the next state
-            // Set initial transitions of all input alphabets to -1
-            this-> myStates[i].nextTransitionStateBasedOnCurrentSymbol[j].stateNumber = -1;
-        }
+        this -> arrayOfStatesInTheDFA[i] = new_State(i);    // add all states to the arrayOfStates array in the dfa
     }
     return this;
 };
@@ -75,7 +60,7 @@ extern struct DFA new_DFA(int nstates)
  */
 extern void DFA_free(DFA this){
     if (this) {
-        free(this -> myStates);
+        free(this -> arrayOfStatesInTheDFA);
 		free(this);
 	}
 // }
@@ -90,19 +75,17 @@ extern int DFA_get_size(DFA this){
 /**
  * Return the state specified by the given DFA's transition function from
  * state src on input symbol sym.
-//  */
+ */
 extern int DFA_get_transition(DFA dfa, int src, char sym){
-    return dfa-> myStates[src].stateNumberToTransitionToBasedOnCharacterInput[sym];
+    return dfa-> arrayOfStatesInTheDFA[src].nextStateNumbers[sym];
 }
 
-
-
-// /**
-//  * For the given DFA, set the transition from state src on input symbol
-//  * sym to be the state dst.
-//  */
+/**
+ * For the given DFA, set the transition from state src on input symbol
+ * sym to be the state dst.
+ */
 extern void DFA_set_transition(DFA dfa, int src, char sym, int dst){
-       
+       dfa-> arrayOfStatesInTheDFA[src].nextStateNumbers[sym] = dst;        //very useful part of the project
 }
 
 int main() {
@@ -110,12 +93,19 @@ int main() {
    
     return 0;
 }
-// /**
-//  * Set the transitions of the given DFA for each symbol in the given str.
-//  * This is a nice shortcut when you have multiple labels on an edge between
-//  * two states.
-//  */
-// extern void DFA_set_transition_str(DFA dfa, int src, char *str, int dst);
+
+/**
+ * Set the transitions of the given DFA for each symbol in the given str.
+ * This is a nice shortcut when you have multiple labels on an edge between
+ * two states.
+ */
+extern void DFA_set_transition_str(DFA dfa, int src, char *str, int dst){
+    for (int i = 0; i < count; i++)
+    {
+        /* code */
+    }
+    
+}
 
 // // /**
 // //  * Set the transitions of the given DFA for all input symbols.
@@ -129,7 +119,7 @@ int main() {
 // //  * Set whether the given DFA's state is accepting or not.
 // //  */
 // extern void DFA_set_accepting(DFA dfa, int state, bool value){
-//     dfa->myStates[state].acceptingState = true;
+//     dfa->arrayOfStatesInTheDFA[state].acceptingState = true;
 // }
 
 // /**

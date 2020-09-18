@@ -17,7 +17,7 @@
  * (encapsulate) its implementation behind the declared API functions and
  * only provide a partial declaration in the header file.
  */
-typedef struct DFA *DFA;
+typedef struct DFA* DFA;
 
 /**
  * Allocate and return a new DFA containing the given number of states.

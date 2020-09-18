@@ -2,28 +2,32 @@
 #include <stdlib.h>
 #include "dfa.h"
 
-typedef struct State *State;
-
+typedef struct State* State;
 struct State 
 {
    int stateNumber;
    bool acceptingState;
-   int *nextTransitionStateBasedOnCurrentSymbol;
+
+   // array of stateNumbers this state transitions to based on inputs ranging from char values of 0 to 128
+   int* nextStateNumbers;
 };
 
 extern State new_State(int stateNumber){
-    struct State* this = (struct State*)malloc(sizeof(struct State));
+    State* this = (State*)malloc(sizeof(struct State));
     if (this == NULL) {
         return NULL; // Out of memory...
     }
-    this -> stateNumber = stateNumber; // number of states
-    // create transition tables for each state on the number of units
-    this->nextTransitionStateBasedOnCurrentSymbol = (int) malloc(128 * sizeof(int));
-    // for each state, set default transition to null
+    // default values
+    this -> stateNumber = stateNumber;  // state Number
+    this -> acceptingState = false;   // accepting value: false
+
+    // initialize all 128 transitions from this state to -1
+    int* nextStateNumbers = (int*) malloc(128 * sizeof(int));
     for (int i = 0; i < 128; i++)
     {
-        this->nextTransitionStateBasedOnCurrentSymbol[i] = 0;
+        nextStateNumbers[i] = -1;
     }
+    
     return this;
 }
 
@@ -31,8 +35,8 @@ extern State transitionToNextState(DFA dfa, State src, char x){
     //what does DFA say?
     int inputCharDecimalEquivalence = x;
     int currentStateNumber = src -> stateNumber;
-    int stateNumberToTransitionToBasedOnInputCharacter = dfa -> myStates[currentStateNumber].nextTransitionStateBasedOnCurrentSymbol[inputCharDecimalEquivalence];
-    return (State) dfa -> myStates[stateToTransitionTo];
+    int stateNumberToTransitionToBasedOnInputCharacter = dfa -> arrayOfStateInTheDFA[currentStateNumber].nextTransitionStateBasedOnCurrentSymbol[inputCharDecimalEquivalence];
+    return (State) dfa -> arrayOfStateInTheDFA[stateToTransitionTo];
 }
 
 // returns true if current state is the accepting state
