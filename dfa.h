@@ -9,6 +9,7 @@
 #define _dfa_h
 
 #include <stdbool.h>
+#include "State.h"
 
 /**
  * The data structure used to represent a deterministic finite automaton.
@@ -18,7 +19,11 @@
  * only provide a partial declaration in the header file.
  */
 typedef struct DFA* DFA;
-
+struct DFA 
+{
+    int nstates;                        //default value
+    State *arrayOfStatesInTheDFA;       //array of states in the DFA
+};
 /**
  * Allocate and return a new DFA containing the given number of states.
  */
