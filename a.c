@@ -1,6 +1,7 @@
-/*
 #include "list.h"
 #include "list.c"
+#include "tree.h"
+#include "tree.c"
 
 bool checker(char *string, char c){           // function checker
     if (*string == c){
@@ -22,7 +23,6 @@ bool check(char *string, char c, char s, char state){
         return false;
     }
 }
-
 
 // DFAs
 bool Turing(char *str){
@@ -172,47 +172,112 @@ bool even01(char *str){
     // how do I optimize this for the algorithm that transforms NFAs to DFAs?
 */
 // set
-// 
 
-nfa class{
-    state 0 
-        on input x = return {set}
-        on input v = return {zet}
-        on anything except x and v = return set {remain at state 0}
-    state x 
-        on input y = {z}
-}
+// struct nfa{
+    
+//     // state 0 
+//     //     on input x = return {set}
+//     //     on input v = return {zet}
+//     //     on anything except x and v = return set {remain at state 0}
+//     // state x 
+//     //     on input y = {z}
+// }
+
+// void changes(int state, char input){
+// }
 
 
-state class{
-    value: true or false;
-    state set return function:
-        if x return {}
-        if y return {}
-        if z return {}
-        if a return {}
-}
+// state class{
+//     value: true or false;
+//     state set return function:
+//         if x return {}
+//         if y return {}
+//         if z return {}
+//         if a return {}
+// }
 
 bool command(char *str){
-    char *ptr = &str;
-    set c;
+    char *ptr = str;
+    node *set = AVLTree->root;
+    makeEmpty(set);
+
     while (*ptr != '\0'){
-        while(setParentIsempty != true){
-            stateNext = setParent.nextState;
-            c.addWithNodDoubles(getSetOfStatesStateNextLeadstoWithPtr(stateNext, ptr));
+        insertf(0, set);
+        switch (*ptr){
+            case 'b':
+                insertf(0, set);
+                if(search(0)){
+                    insertf(1, set);
+                }
+                break;
+            case 'a':
+                insertf(0, set);
+                if(search(1)){
+                    insertf(2, set);
+                }
+                break;
+            case 'c':
+                insertf(0, set);
+                if(search(2)){
+                    insertf(3, set);
+                }
+                break;
+            case 'k':
+                insertf(0, set);
+                if(search(3)){
+                    insertf(4, set);
+                }
+                break;
+            default:
+                insertf(0, set);
+                break;
         }
-        setParent.addWithNoDoubles(c);
         *ptr++;
     }
-
-    {walkthrough setParent:// if any is accepting accepts "str", else reject str}
-    
+    if(searchf(set, 4)){
+        return true;
+    }else{
+        return false;
+    }
 }
+//         if(checker_ptr(ptr, 'b') && search(0)){
+//             insertf(1, set);
+//         }else if(checker_ptr(ptr, 'a') && search(0)){
+//             insertf(0, set);
+//         }else if(checker_ptr(ptr, 'c') && search(0)){
+//             insertf(0, set);
+//         }else if(checker_ptr(ptr, 'k') && search(0)){
+//             insertf(0, set);
+//         }
+
+//         if()
+
+//         if(checker_ptr(ptr, 'b') && search(0)){
+//             insertf(1, set);
+//         }
+//         if(checker_ptr(ptr, 'b') && search(0)){
+//             insertf(1, set);
+//         }
+//         if(checker_ptr(ptr, 'b') && search(0)){
+//             insertf(1, set);
+//         }
+//         while(setParentIsempty != true){
+//             stateNext = setParent.nextState;
+//             c.addWithNodDoubles(getSetOfStatesStateNextLeadstoWithPtr(stateNext, ptr));
+//         }
+//         setParent.addWithNoDoubles(c);
+//         *ptr++;
+//     }
+//     walkthrough setParent:// if any is accepting accepts "str", else reject str
+
+
 bool eback(char *str){}
 bool cback(char *str){}
 bool washington(char *str){}
 
 int main(){
+    int a = command("heback");
+    printf("%i",a);
     // char str[7] = "Turing";
     // char *ptr =  str;
     // bool a = Turing_ptr(ptr);
@@ -239,8 +304,7 @@ int main(){
     // printf("%i\n", a);
 
     // state1();
-    // return 0;
+    return 0;
 }
 
 
-*/

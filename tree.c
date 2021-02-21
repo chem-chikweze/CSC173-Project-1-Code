@@ -3,23 +3,7 @@
 
 #include "tree.h"
 
-struct avl
-{
-    int state;
-    int balanceFactor;
 
-    node *left;
-    node *right;
-    node *parent;
-};
-
-
-struct avl_t{
-    node *root;
-};
-typedef struct avl_t tree;
-tree t;
-tree *AVLTree = &t;
 
 // void newtree(){
 //     AVLTree =  (tree *)malloc(sizeof(tree));
@@ -37,7 +21,7 @@ node* newNodeParent(int data, node* par)
     if(s == NULL){
         //  printf("\n-newNodeParent: null child created");
         return NULL;    
-    } 
+    }
     s->state = data;
     s->parent = par;
     s->left = NULL;
@@ -228,13 +212,15 @@ bool isEmpty() {
         return true;
     }else{return AVLTree->root == NULL; }
 }
-
 void makeEmpty() { 
-    if(AVLTree == NULL){
+    makeEmptyf(AVLTree->root);
+}
+void makeEmptyf(node* set) { 
+    if(set == NULL){
         // printf("\ntree does not exist yet."); 
         return;
     }else{
-    AVLTree->root = NULL; }
+    set = NULL; }
 }
 
 // int height(struct avl *x)
@@ -318,6 +304,7 @@ void inorderf(node* r)
     }else return;
 }
 
+/*
 int main(){
     // makeEmpty();
     newTree();

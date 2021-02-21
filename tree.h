@@ -1,3 +1,6 @@
+#ifndef TREE_H
+#define TREE_H
+
 typedef int bool;
 typedef struct avl node;
 
@@ -5,6 +8,23 @@ typedef struct avl node;
 #define noir 1
 #define true 1
 #define false 0
+
+struct avl{
+    int state;
+    int balanceFactor;
+
+    node *left;
+    node *right;
+    node *parent;
+};
+
+
+struct avl_t{
+    node *root;
+};
+typedef struct avl_t tree;
+tree t;
+tree *AVLTree = &t;
 
 node *newNode();
 void newTree();
@@ -56,3 +76,4 @@ void postorderf(struct avl* r);
 // void postorder(avl );
 
 
+#endif 
