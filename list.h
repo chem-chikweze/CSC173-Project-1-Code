@@ -24,15 +24,14 @@ bool (*even01_ptr)(char*) = &even01;
 
 
 // NFA Functions
-bool command(char *str);
 bool eback(char *str);
-bool cback(char *str);
+bool containsback(char *str);
 bool washington(char *str);
+bool containsChem(char *str);
 
 // NFA function pointers
-bool (*command_ptr)(char*) = &command;            
 bool (*eback_ptr)(char*) = &eback;            
-bool (*cback_ptr)(char*) = &cback;            
+bool (*containsback_ptr)(char*) = &containsback;            
 bool (*washington_ptr)(char*) = &washington;            
 
 

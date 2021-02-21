@@ -1,7 +1,7 @@
 #include "list.h"
-#include "list.c"
+// #include "list.c"
 #include "tree.h"
-#include "tree.c"
+// #include "tree.c"
 
 bool checker(char *string, char c){           // function checker
     if (*string == c){
@@ -196,88 +196,304 @@ bool even01(char *str){
 //         if a return {}
 // }
 
-bool command(char *str){
+bool eback(char *str){
     char *ptr = str;
-    node *set = AVLTree->root;
-    makeEmpty(set);
+    node *set = newSet();
 
     while (*ptr != '\0'){
-        insertf(0, set);
-        switch (*ptr){
+        // printf("%c", *ptr);
+        char choice = *ptr;
+        switch (choice){
             case 'b':
                 insertf(0, set);
-                if(search(0)){
+                if(searchf(set, 0)){
                     insertf(1, set);
+                    // printf("\nWoo%c", choice);
                 }
+                *ptr++;
                 break;
             case 'a':
                 insertf(0, set);
-                if(search(1)){
+                if(searchf(set, 1)){
                     insertf(2, set);
+                    // printf("\nWoo%c", choice);
                 }
+                *ptr++;
                 break;
             case 'c':
                 insertf(0, set);
-                if(search(2)){
+                if(searchf(set, 2)){
                     insertf(3, set);
+                    // printf("\nWoo%c", choice);
                 }
+                *ptr++;
                 break;
             case 'k':
                 insertf(0, set);
-                if(search(3)){
+                if(searchf(set, 3)){
                     insertf(4, set);
+                    // printf("\nWoo%c", choice);
+                    // printf("%c", *ptr+1);
+                    if(*ptr+1 == 'l' && searchf(set, 4)){
+                        insertf(5, set);
+                    }
                 }
+                *ptr++;
                 break;
             default:
                 insertf(0, set);
+                *ptr++;
                 break;
         }
-        *ptr++;
     }
+
+    inorderf(set);
+    if(searchf(set, 5)){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+bool containsback(char *str){
+    char *ptr = str;
+    node *set = newSet();
+
+    while (*ptr != '\0'){
+        // printf("%c", *ptr);
+        char choice = *ptr;
+        switch (choice){
+            case 'b':
+                insertf(0, set);
+                if(searchf(set, 0)){
+                    insertf(1, set);
+                    // printf("\nWoo%c", choice);
+                }
+                *ptr++;
+                break;
+            case 'a':
+                insertf(0, set);
+                if(searchf(set, 1)){
+                    insertf(2, set);
+                    // printf("\nWoo%c", choice);
+                }
+                *ptr++;
+                break;
+            case 'c':
+                insertf(0, set);
+                if(searchf(set, 2)){
+                    insertf(3, set);
+                    // printf("\nWoo%c", choice);
+                }
+                *ptr++;
+                break;
+            case 'k':
+                insertf(0, set);
+                if(searchf(set, 3)){
+                    insertf(4, set);
+                    // printf("\nWoo%c", choice);
+                    // printf("%c", *ptr+1);
+                }
+                *ptr++;
+                break;
+            default:
+                insertf(0, set);
+                *ptr++;
+                break;
+        }
+    }
+
+    inorderf(set);
     if(searchf(set, 4)){
         return true;
     }else{
         return false;
     }
 }
-//         if(checker_ptr(ptr, 'b') && search(0)){
-//             insertf(1, set);
-//         }else if(checker_ptr(ptr, 'a') && search(0)){
-//             insertf(0, set);
-//         }else if(checker_ptr(ptr, 'c') && search(0)){
-//             insertf(0, set);
-//         }else if(checker_ptr(ptr, 'k') && search(0)){
-//             insertf(0, set);
-//         }
 
-//         if()
+bool washington(char *str){
+    char *ptr = str;
+    node *set = newSet();
+    node *reject = newSet();
+    while (*ptr != '\0'){
+        // printf("\t%c", *ptr);
+        char choice = *ptr;
+        switch (choice){
+            case 'w':
+                if(searchf(set, 18)){
+                    insertf(19, set);
+                    insertf(19, reject);
+                    // printf("\nWoo%c", choice);
+                }
+                insertf(0, set);
+                insertf(18, set);
+                // printf("%c", choice);
+                *ptr++;
+                break;
+            case 'a':
+                if(searchf(set, 1)){
+                    insertf(2, set);
+                    insertf(2, reject);
+                    // printf("\nWoo%c", choice);
+                }
+                insertf(0, set);
+                insertf(1, set);
+                // printf("%c", choice);
+                *ptr++;
+                break;
+            case 's':
+                if(searchf(set, 14)){
+                    insertf(15, set);
+                    insertf(15, reject);
+                    // printf("\nWoo%c", choice);
+                }
+                insertf(0, set);
+                insertf(14, set);
+                // printf("%c", choice);
+                *ptr++;
+                break;
+            case 'h':
+                if(searchf(set, 5)){
+                    insertf(6, set);
+                    insertf(6, reject);
+                    // printf("\nWoo%c", choice);
+                }
+                insertf(0, set);
+                insertf(5, set);
+                // printf("%c", choice);
+                *ptr++;
+                break;
+            case 'i':
+                if(searchf(set, 7)){
+                    insertf(8, set);
+                    insertf(8, reject);
+                }
+                insertf(0, set);
+                insertf(7, set);
+                // printf("%c", choice);
+                *ptr++;
+                break;
+            case 'n':
+                if(searchf(set, 10)){
+                    insertf(11, set);
+                    insertf(11, reject);
+                }
+                if(searchf(set, 9)){
+                    insertf(10, set);
+                    insertf(10, reject);
+                }
+                insertf(0, set);
+                insertf(9, set);
+                // printf("%c", choice);
+                *ptr++;
+                break;
+            case 'g':
+                if(searchf(set, 3)){
+                    insertf(4, set);
+                    insertf(4, reject);
+                }
+                insertf(0, set);
+                insertf(3, set);
+                // printf("%c", choice);
+                *ptr++;
+                break;
+            case 't':
+                if(searchf(set, 16)){
+                    insertf(17, set);
+                    insertf(17, reject);
+                }
+                insertf(0, set);
+                insertf(16, set);
+                // printf("%c", choice);
+                *ptr++;
+                break;
+            case 'o':
+                if(searchf(set, 12)){
+                    insertf(13, set);
+                    insertf(13, reject);
+                }
+                insertf(0, set);
+                insertf(12, set);
+                // printf("%c", choice);
+                *ptr++;
+                break;
+            default:
+                insertf(0, set);
+                *ptr++;
+                break;
+        }
+    }
 
-//         if(checker_ptr(ptr, 'b') && search(0)){
-//             insertf(1, set);
-//         }
-//         if(checker_ptr(ptr, 'b') && search(0)){
-//             insertf(1, set);
-//         }
-//         if(checker_ptr(ptr, 'b') && search(0)){
-//             insertf(1, set);
-//         }
-//         while(setParentIsempty != true){
-//             stateNext = setParent.nextState;
-//             c.addWithNodDoubles(getSetOfStatesStateNextLeadstoWithPtr(stateNext, ptr));
-//         }
-//         setParent.addWithNoDoubles(c);
-//         *ptr++;
-//     }
-//     walkthrough setParent:// if any is accepting accepts "str", else reject str
+    inorderf(reject);
+    if(reject->left != NULL || reject->right != NULL){
+        return true;
+    }else{
+        return false;
+    }
+}
 
+bool containsChem(char *str){
+    char *ptr = str;
+    node *set = newSet();
+    while (*ptr != '\0'){
+        char choice = *ptr;
+        switch (choice){
+            case 'c':
+                insertf(0, set);
+                if(searchf(set, 0)){
+                    insertf(1, set);
+                }
+                *ptr++;
+                break;
+            case 'h':
+                insertf(0, set);
+                if(searchf(set, 1)){
+                    insertf(2, set);
+                }
+                *ptr++;
+                break;
+            case 'e':
+                insertf(0, set);
+                if(searchf(set, 2)){
+                    insertf(3, set);
+                }
+                *ptr++;
+                break;
+            case 'm':
+                insertf(0, set);
+                if(searchf(set, 3)){
+                    insertf(4, set);
+                }
+                *ptr++;
+                break;
+            default:
+                insertf(0, set);
+                *ptr++;
+                break;
+        }
+    }
 
-bool eback(char *str){}
-bool cback(char *str){}
-bool washington(char *str){}
+    inorderf(set);
+    if(searchf(set, 4)){
+        return true;
+    }else{
+        return false;
+    }
+}
 
 int main(){
-    int a = command("heback");
-    printf("%i",a);
+    // int a = eback("abackback");
+    // printf("\n true of false: %i",a);
+
+    // int b = containsback("bckales");
+    // printf("\ntrue of false: %i",b);
+
+    int c = washington("washi");
+    printf("\nWash");
+    printf("\ntrue of false: %i", c);
+
+    printf("\nDoes it have chem ?: %i", containsChem("chm"));
+
     // char str[7] = "Turing";
     // char *ptr =  str;
     // bool a = Turing_ptr(ptr);

@@ -5,18 +5,18 @@
 
 
 
-// void newtree(){
-//     AVLTree =  (tree *)malloc(sizeof(tree));
-//     if(AVLTree== NULL ){
-//         printf("no tree created");
-//         return ;
-//     }
-//     newNode(AVLTree->root);
-//     printf("\ntree created");
-// }
+node* newSet(){
+    node* temp = (node *)malloc(sizeof(node));
+    if(temp == NULL ){
+        printf("no tree created");
+        return NULL;
+    }
+    temp = newNodeParent(0, NULL);
+    printf("\ntree created");
+    return temp;
+}
 
-node* newNodeParent(int data, node* par)
-{
+node* newNodeParent(int data, node* par){
     node *s = (node *)malloc(sizeof(node));
     if(s == NULL){
         //  printf("\n-newNodeParent: null child created");
@@ -52,6 +52,9 @@ void insert(int state) {
 
 void insertf(int state, node* parent)
 {
+    if(parent == NULL){
+        printf("yaya");
+    }
     if(state < parent->state){
         if(parent->left == NULL){
             parent->left = newNodeParent(state, parent);
@@ -220,15 +223,10 @@ void makeEmptyf(node* set) {
         // printf("\ntree does not exist yet."); 
         return;
     }else{
-    set = NULL; }
+        set = NULL; 
+    }
 }
 
-// int height(struct avl *x)
-// {
-//     if (x == NULL)
-//         return 0;
-//     return x->height;
-// }
 
 int max(int lhs, int rhs){
     if(lhs>rhs) return lhs;

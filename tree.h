@@ -28,6 +28,8 @@ tree *AVLTree = &t;
 
 node *newNode();
 void newTree();
+node* newSet();
+node* newNodeParent(int data, node* par);
 
 void insertf(int state, node *t);
 void  insertwithParent(int state, node *parent, node* child);
@@ -47,6 +49,7 @@ int height(struct avl *x);
 void insertf(int state, node *t);
 void rebalance(node *t);
 
+void makeEmptyf(node* set);
 
 bool searchf(struct avl* r, int val);
 void inorder();
