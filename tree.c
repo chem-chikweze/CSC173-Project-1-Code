@@ -8,11 +8,11 @@
 node* newSet(){
     node* temp = (node *)malloc(sizeof(node));
     if(temp == NULL ){
-        printf("no tree created");
+        // printf("no tree created");
         return NULL;
     }
     temp = newNodeParent(0, NULL);
-    printf("\ntree created");
+    // printf("\ntree created");
     return temp;
 }
 
@@ -367,7 +367,6 @@ int main(){
     // if(AVLTree->root->left == NULL){
     //     printf("\n root left %i ", AVLTree->root->state);
     // }
-    /*
     references;
     https://courses.cs.washington.edu/courses/cse373/06sp/handouts/lecture12.pdf
     https://www.freecodecamp.org/news/avl-tree-insertion-rotation-and-balance-factor/
