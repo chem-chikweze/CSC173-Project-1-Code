@@ -1,6 +1,5 @@
 #include <string.h>
 #include "list.h"
-#include "list.c"
 #include "tree.h"
 #include "tree.c"
 
@@ -91,7 +90,7 @@ bool binary(char *str){
         }else if(check(ptr, '1', '1', state)){
             ptr+=1;
             state = '0';
-        }else if(ptr != '0' && ptr != '1'){
+        }else if(*ptr != '0' && *ptr != '1'){
             ptr+=1;
         }
     }
@@ -125,7 +124,7 @@ bool bin0odd1(char *str){
                 ptr+=1;
                 state2 = '0';
             }  
-        }else if(ptr != '0' && ptr != '1'){
+        }else if(*ptr != '0' && *ptr != '1'){
             ptr+=1;
         }
     }
@@ -158,7 +157,7 @@ bool even01(char *str){
                 ptr+=1;
                 state2 = '0';
             }  
-        }else if(ptr != '0' && ptr != '1'){
+        }else if(*ptr != '0' && *ptr != '1'){
             ptr+=1;
         }  
     }
@@ -549,8 +548,6 @@ void run(int choice, char *s){
             printf("Not Accepted.");
         }
     }
-    
-    
 }
 
 int main(){
@@ -594,7 +591,7 @@ int main(){
     scanf("%s", s);
     run(9, s);
     
-    printf("\n%s", "Lol. Thanks. The End.");
+    printf("\n%s", "The End.");
     return 0;
 }
 
