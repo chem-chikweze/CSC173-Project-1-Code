@@ -5,8 +5,6 @@
 
 #define failed NULL
 
-
-
 typedef struct node *tree;
 struct node{
     char *label;

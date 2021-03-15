@@ -34,24 +34,6 @@ tree makeNode4(char *x, tree t1, tree t2, tree t3, tree t4){
     return rt;
 }
 
-void traverse(tree root){
-    tree temp = root;
-    
-    printf("%s\t\n", temp->label);
-    if(temp->leftmostchild != NULL){
-        printf("\t");
-        traverse(temp->leftmostchild);
-    }
-
-    while(temp->rightsibling != NULL){
-        // printf("\t");
-        traverse(temp->rightsibling);
-        temp = temp->rightsibling;
-    }
-}
-
-
-
 char *nextterminal;
 
 tree E(){
@@ -81,7 +63,7 @@ tree ET(){
             rt->leftmostchild->rightsibling = e;
             return rt;
         }else{return failed;}
-    }else{  return  makeNode1("ET", makeNode0("e"));  }
+    }else{  return  makeNode1("ET", makeNode0("eps"));  }
 }
 
 tree C(){
@@ -100,7 +82,7 @@ tree C(){
 }
 
 tree CT(){
-    if(*nextterminal == '.'){
+    if( *nextterminal == '.'){
         tree rt;
         tree c;
         nextterminal++;
@@ -111,7 +93,7 @@ tree CT(){
             rt->leftmostchild->rightsibling = c;
             return rt;
         }else{return failed;}
-    }else{  return makeNode1("CT", makeNode0("e"));  }
+    }else{  return makeNode1("CT", makeNode0("eps"));  }
 }
 
 tree S(){
@@ -144,7 +126,7 @@ tree ST(){
             return failed;
         }
     }else{
-        return makeNode1("ST", makeNode0("e")) ;
+        return makeNode1("ST", makeNode0("eps")) ;
     }
 }
 
@@ -159,14 +141,21 @@ tree A(){
         }else{
             return failed;
         }
-    }else{  e = X();  if(e != failed){return makeNode1("A", e) ;} else{return failed;}   }
+    }else{  
+        e = X();  
+        if(e != failed){
+            return makeNode1("A", e) ;
+        } else{
+            return failed;
+        }   
+    }
 }
 
 tree X(){
     tree rt;
-    if(*nextterminal >= 97 || *nextterminal <= 122){
-        tree leaf = makeNode0(*nextterminal+"");
-        rt = makeNode1("X", leaf);
+    if(*nextterminal >= 'a' && *nextterminal <= 'z'){
+        char tostring[2] = {*nextterminal, '\0'};
+        rt = makeNode1("X", makeNode0( tostring ));
         nextterminal++;
         return rt;
     }else{
@@ -174,9 +163,29 @@ tree X(){
     }
 }
 
+void traverse(tree root){
+    if(root == NULL){
+        return;
+    }
+
+    while (root)
+    {
+        printf("  ");
+        if(root->label != NULL){
+            printf("%s\n", (root->label));
+        }
+
+        if(root->leftmostchild){
+            printf("  ");
+            traverse(root->leftmostchild);
+        }
+        printf("  ");
+        root = root->rightsibling;
+    }
+}
 
 int main(){
-    nextterminal = "a|b.c*";
+    nextterminal = "a(.a*";
     tree parsetree = E();
     // printf("%s",parsetree->label);
     traverse(parsetree);
