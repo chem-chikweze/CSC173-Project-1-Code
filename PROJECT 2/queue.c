@@ -4,16 +4,14 @@
 
 
 
-queue first = NULL;
-queue last = NULL;
-int count = 0;
-
-queue newqueue(char* data){
-    first = (queue)malloc(sizeof(struct QUEUE));
-    last = (queue)malloc(sizeof(struct QUEUE));
+// queue first = NULL;
+// queue last = NULL;
+queue grammer[2];
+queue* newqueue(char* data){
+    queue first = (queue)malloc(sizeof(struct QUEUE));
+    queue last = (queue)malloc(sizeof(struct QUEUE));
 
     first->label = data;
-    // last->label = data;
 
     first->next = NULL;
     first->prev = last;
@@ -21,12 +19,18 @@ queue newqueue(char* data){
     last->prev = NULL;
     last->label = NULL;
 
-    count = count+1;
-    return first;
+    first->count = 0;
+    
+    grammer[0] = first;
+    grammer[1] = last;
+    printf("\nGrammer 0: %s", grammer[0]->label);
+    printf("\nGrammer 1: %s", grammer[1]->label);
+    printf("\nhey");
+    return grammer;
 }
-
-queue dequeue(){
-    if(isEmptyQ()){
+/////
+queue dequeue(queue first){
+    if(isEmptyQ(first)){
         printf("\nDequeue: 0 empty");
         return NULL;
     }else{
@@ -36,32 +40,32 @@ queue dequeue(){
         first = first->prev;
         first->next = NULL;
         printf("\nDequeue: 1 newfirst: %s", first->label);
-        count = count-1;
+        first->count = first->count-1;
         return first;
     }
 }
 
-void enqueue(char* data){
-    queue new = (queue)malloc(sizeof(struct QUEUE));
-    new->label = data;
-
+queue* enqueue(char* data, queue first, queue last){
     if(first ==  NULL){
-        newqueue(data);
-        count = count+1;
-        return;
+        return newqueue(data);
     }
 
+    queue new = (queue)malloc(sizeof(struct QUEUE));
+    new->label = data;
     if(last->next != NULL && last->label == NULL){
         last->next->prev = new;
         new->next = last->next;
         new->prev = last;
         last->next = new;
-        count = count+1;
-        return;
+        first->count = first->count+1;
+
+        grammer[0] = first;
+        grammer[1] = last;
+        return grammer;
     }
 }
 
-int isEmptyQ(){
+int isEmptyQ(queue first){
     if(first== NULL){
         printf("\nq.isEmpty: 1");
         return 1;
@@ -71,8 +75,8 @@ int isEmptyQ(){
     }
 }
 
-char* firstQ(){
-    if(isEmptyQ() == 0){
+char* peekQ(queue first){
+    if(isEmptyQ(first) == 0){
         printf("\nq.Peek: 1 %s", first->label);
         return first->label;
     }else{
@@ -81,12 +85,13 @@ char* firstQ(){
     }
 }
 
-int size(){
-    return count;
+int size(queue first){
+    return first->count;
 }
 
-void displayQ(){
+void displayQ(queue first){
     queue temp = first;
+    
     while( temp != NULL && temp->label != NULL){
         printf("\nq.DIS: %s", temp->label);
         temp = temp->prev;
@@ -95,9 +100,10 @@ void displayQ(){
 }
 
 int main(){
-    newqueue("ET");
-    enqueue("E");
-    enqueue("S");
-    enqueue("ST");
-    displayQ();
+    queue ET[2];
+    ET[0] = newqueue("ET")[0];
+    ET[1] = newqueue("ET")[1];
+    
+    
+    displayQ(ET[0]);
 }
