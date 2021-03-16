@@ -6,6 +6,7 @@ struct stack
 {
     char *label;
     plate next;
+    plate prev;
     int terminal;
 };
 
@@ -28,6 +29,7 @@ plate CT_table;
 plate S_table;
 plate ST_table;
 plate A_table;
+plate Ax_table;
 plate X_table;
 
 
