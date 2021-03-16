@@ -10,6 +10,14 @@ tree makeNode0(char *x){
     return root;
 }
 
+tree make0(tree root, char *x){
+    root = (tree) malloc(sizeof(struct node));
+    root->label = x;
+    root->leftmostchild = NULL;
+    root->rightsibling = NULL;
+    return root;
+}
+
 tree makeNode1(char *x, tree t){
     tree rt;
     rt = (tree) malloc(sizeof(struct node));
@@ -184,10 +192,10 @@ void traverse(tree root){
     }
 }
 
-int main(){
-    nextterminal = "a(.a*";
-    tree parsetree = E();
-    // printf("%s",parsetree->label);
-    traverse(parsetree);
+// int main(){
+//     nextterminal = "a(.a*";
+//     tree parsetree = E();
+//     // printf("%s",parsetree->label);
+//     traverse(parsetree);
     
-}
+// }
