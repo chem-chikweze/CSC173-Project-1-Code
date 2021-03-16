@@ -42,11 +42,12 @@ char *peek(plate top)
     }
 }
 
-void pop(plate top)
+plate pop(plate top)
 {
     if (isEmpty(top))
     {
         printf("\nPop: 0 empty");
+        return NULL;
     }
     else
     {
@@ -54,6 +55,7 @@ void pop(plate top)
         top = top->next;
         printf("\nPop: 1 pop: %s", top->label);
         // printf("\nPop: 1 newtop: %s", top->label);
+        return top;
     }
 }
 
@@ -141,6 +143,10 @@ void syntactic()
     A_table = push(newPlate(")", 1), A_table);
 
     Ax_table = newPlate("X", 0);
+    
+    
+    X_table = newPlate("X", 1);
+
 
     printf("\nsyntactic");
 }
@@ -257,7 +263,7 @@ plate table(char *label, char next)
             char *ptr = malloc(2 * sizeof(char));
             ptr[0] = next;
             ptr[1] = '\0';
-            printf("\nkchar %c ", next);
+            printf("\nkchar %s ", ptr);
             return newPlate(ptr, 1);
         }
         else
@@ -267,8 +273,9 @@ plate table(char *label, char next)
     }
 }
 
-int parsertable(char *terminal)
+int parsertable(char *entry)
 {
+    char* terminal = entry;
     Stack = newPlate("$", 0);
     Stack = push(newPlate("E", 0), Stack);
     display(Stack);
@@ -292,9 +299,11 @@ int parsertable(char *terminal)
             ptr[1] = '\0';
             if (strcmp(Stack->label, ptr) == 0)
             {
-                pop(Stack);
-                pop(Stack);
-                next = *terminal + 1;
+                Stack = pop(Stack);
+                printf("\nbinally: %c", next);
+                terminal = terminal +1;
+                next = *terminal;
+                printf("\nfinally: %c", next);
             }
             else
             {
@@ -314,7 +323,8 @@ int parsertable(char *terminal)
             else
             {
                 plate syn = table(Stack->label, next);
-                pop(Stack);
+                printf("\nSynlabel: %s",syn->label);
+                Stack = pop(Stack);
                 Stack = push2(syn, Stack);
                 // {
                 //     Stack = push2(syn, Stack);
@@ -335,9 +345,14 @@ int main()
 {
 
     syntactic();
+    // Stack = newPlate("$", 0);
+    // Stack = push(newPlate("E", 0), Stack);
+    // Stack = push2(newPlate("X", 1), Stack);
+    // Stack = pop(Stack);
     char *terminal = "a|b.c*";
+   
     int parse = parsertable(terminal);
-    display(Stack);
+    // display(Stack);
     // printf("%d", parse);
     // printf("\n%s", parsetree->label);
     // display(S_table);

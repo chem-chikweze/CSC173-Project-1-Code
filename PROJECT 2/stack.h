@@ -15,7 +15,7 @@ plate table(char* label, char next);
 plate newPlate(char* data, int t);
 int isEmpty(plate top);
 char* peek(plate top);
-void pop(plate top);
+plate pop(plate top);
 plate push(plate new, plate top);
 void display(plate top);
 int parsertable(char* terminal);
